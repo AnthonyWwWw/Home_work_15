@@ -1,0 +1,142 @@
+@import './null.scss';
+
+///----------------------import------------------///
+
+///-------------------variables------------------///
+$fontFamaliMontserrat: "Montserrat", sans-serif;
+///-----------------end-variables----------------///
+
+///----------------------global------------------///
+
+///--------------------end-global------------------///
+
+
+///-----------------------body--------------------///
+body{
+    background-color: #F2EDDC;
+}
+.conteiner_pageAddTask {
+    width: 650px;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 30px;
+    align-items: end;
+}
+
+.page_addTask{
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-family: $fontFamaliMontserrat;
+    color: #3b4834;
+    // font-optical-sizing: auto;
+    font-weight: 500;
+    // font-style: normal;
+    font-size: 40px;
+}
+.input {
+    width: 400px;
+    margin-top: 20px;
+    font-family: $fontFamaliMontserrat;
+    color: #3b4834;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding-left: 5px;
+}
+
+.buttonAddLink{
+    font-family: $fontFamaliMontserrat;
+    background-color: #593A28;
+    color: aliceblue;
+    width: 200px;
+    height: 30px;
+    margin-left: 100px;
+    border-radius: 30px;
+    transition-duration: 1s;
+    transition-property: all;
+    
+    &:hover{
+        background-color: #161811;
+    }
+}
+
+.conteiner_taskList{
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    border-radius: 10px;
+    width: 950px;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.illuminationMarkDone{
+    background-color: #4ac52e;
+    color: aliceblue;
+    border-radius: 20px;
+}
+.illuminationRemove{
+    background-color: #c52e2e;
+    color: aliceblue;
+    border-radius: 20px;
+}
+.taskList_item{
+    margin-top: 20px;
+    width: 470px; 
+    padding: 5px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    position: relative;
+    text-align: inherit;
+    transition-duration: 1s;
+    transition-property: all;
+}
+.markDoneButton{
+    position: absolute;
+    top: 0; 
+    right: -410px;
+    background-color: #593A28;
+    box-shadow: rgb(255, 255, 255) -0.2px 0px;
+
+    color: aliceblue;
+    width: 200px;
+    height: 30px;
+    margin-left: 40px;
+    border-radius: 30px;
+    transition-duration: 1s;
+    transition-property: all;
+
+    &:hover{
+        background-color: #4ac52e;
+    }
+
+}
+
+.buttonRemoveTask{
+    position: absolute;
+    top: 0; 
+    right: -268px;
+    background-color: #593A28;
+    color: aliceblue;
+    width: 200px;
+    height: 30px;
+    margin-left: 40px;
+    border-radius: 30px;
+    transition-duration: 1s;
+    transition-property: all;
+
+    &:hover{
+        background-color: #c52e2e;
+    }
+}
+
+.taskList{
+    display: block;
+    font-family: $fontFamaliMontserrat;
+    color: #3b4834;
+    font-size: 20px;
+}
+///--------------------END-body-------------------///

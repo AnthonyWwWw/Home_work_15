@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="css/main.css">
+</head>
+<body>
+        <!-- 15.1. TODO з WebStorage
+           Доробити TODO лист, в якому буде можливість:
+
+            Додати завдання
+            Видалити завдання
+            Відзначити як виконану
+            Усі дані повинні зберегтися після перезавантаження сторінки.-->
+            
+            <div class="conteiner_pageAddTask">
+                <div class="page_addTask">
+                    <label for="input" class="label" id="label">Нове завдання</label>
+                    <input type="text" class="input" id="input" placeholder="Створіть нове завдання">
+                </div>
+                <button class="buttonAddLink" id="buttonAddLink">Додати завдання</button>
+            </div>
+            
+            <div class="conteiner_taskList" id="conteiner_taskList">
+                <ul class="taskList" id="taskList">
+                </ul>
+            </div>
+            <script src="./sours/js/main.js"></script>
+</body>
+</html>

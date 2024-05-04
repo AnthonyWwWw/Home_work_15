@@ -20,7 +20,7 @@ function TaskManager(data) {
         });
     };
 
-    this.checkForCorrectness = function (input) {
+    this.checkForCorrectness = function (input) {//Ця функція перевіряє, чи не порожній вміст вводу.
         if (input.trim() !== '') {
             return input;
         } else {
@@ -29,27 +29,27 @@ function TaskManager(data) {
         }
     };
 
-    this.clearInput = function () {
+    this.clearInput = function () {//Ця функція очищує поле вводу
         input.value = "";
     };
 
-    this.createTaskElement = function (content, id, saveIllumination) {
+    this.createTaskElement = function (content, id, saveIllumination) {//Ця функція створює новий елемент завдання (елемент списку) із наданим вмістом
         const newElement = document.createElement('li');
         newElement.setAttribute('id', id);
         newElement.setAttribute('saveIlluminationMarkDone', saveIllumination);
         newElement.classList.add("taskList_item");
         newElement.textContent = content;
 
-        const removeButton = this.createRemoveButton();
+        const removeButton = this.createRemoveButton(); // Створення кнопки "Видалити"
         newElement.appendChild(removeButton);
 
-        const markDoneButton = this.createMarkDoneButton(saveIllumination);
+        const markDoneButton = this.createMarkDoneButton(saveIllumination);// Створення кнопки "Виконане"
         newElement.appendChild(markDoneButton);
 
         return newElement;
     };
 
-    this.createMarkDoneButton = function (saveIllumination) {
+    this.createMarkDoneButton = function (saveIllumination) { // Створення кнопки "Виконане"
         const markDoneButton = document.createElement("button");
         markDoneButton.textContent = 'Виконане';
         markDoneButton.classList.add("markDoneButton");
@@ -95,7 +95,7 @@ function TaskManager(data) {
         return markDoneButton;
     };
 
-    this.createRemoveButton = function () {
+    this.createRemoveButton = function () {// Створення кнопки "Видалити"
         const removeButton = document.createElement('button');
         removeButton.classList.add("buttonRemoveTask");
         removeButton.textContent = "Видалити";
@@ -128,7 +128,7 @@ function TaskManager(data) {
         return removeButton;
     };
 
-    this.addTask = function (task) {
+    this.addTask = function (task) {// Додавання завдання
         const tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE)) || [];
         const isExist = tasks.some(item => item.id === task.id);
         if (isExist) {
@@ -143,22 +143,22 @@ function TaskManager(data) {
         localStorage.setItem(LOCAL_STORAGE, JSON.stringify(tasks));
     };
 
-    this.renderTask = function (task) {
+    this.renderTask = function (task) {// Відображення завдання
         const newElement = this.createTaskElement(task.content, task.id, task.saveIllumination);
         if (newElement.getAttribute('saveIlluminationMarkDone') !== 'dontSave'){
             newElement.classList.add('illuminationMarkDone');
         }
         taskList.appendChild(newElement);
     };
-
-    this.loadTasks = function () {
+    
+    this.loadTasks = function () {// Завантаження завдань
         const tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE)) || [];
         tasks.forEach(task => this.renderTask(task));
     };
 }
 
-(new TaskManager({
+(new TaskManager({// Ініціалізація TaskManager з передачею елементів DOM
     input: document.querySelector('#input'),
-    addButton: document.querySelector('#buttonAddLink'),
+    addButton: document.querySelector('#buttonAddTask'),
     taskList: document.querySelector('#taskList'),
 })).init();

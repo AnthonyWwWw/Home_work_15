@@ -1,23 +1,31 @@
 function TaskManager(data) {
-    const { input, addButton, taskList } = data;
+    const { form, input, addButton, taskList } = data;
     const LOCAL_STORAGE = 'tasks';
 
     this.init = function () {
         this.loadTasks();
-        addButton.addEventListener('click', () => {
-            const inputContent = input.value;
-            let newTaskContent = this.checkForCorrectness(inputContent);
-            if (newTaskContent) {
-                const task = { 
-                    id: Math.floor(Math.random() * 100),
-                    content: newTaskContent,
-                    saveIllumination: 'dontSave',
-                }
-                this.addTask(task);
-                this.renderTask(task);
-                this.clearInput();
-            }
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.handleTaskAdding();
         });
+        addButton.addEventListener('click', () => {
+            this.handleTaskAdding();
+        });
+    };
+    
+    this.handleTaskAdding = function () {
+        const inputContent = input.value;
+        let newTaskContent = this.checkForCorrectness(inputContent);
+        if (newTaskContent) {
+            const task = { 
+                id: Math.floor(Math.random() * 100),
+                content: newTaskContent,
+                saveIllumination: 'dontSave',
+            }
+            this.addTask(task);
+            this.renderTask(task);
+            this.clearInput();
+        }
     };
 
     this.checkForCorrectness = function (input) {//Ця функція перевіряє, чи не порожній вміст вводу.
@@ -29,7 +37,7 @@ function TaskManager(data) {
         }
     };
 
-    this.clearInput = function () {//Ця функція очищує поле вводу
+    this.clearInput = function () {
         input.value = "";
     };
 
@@ -40,10 +48,10 @@ function TaskManager(data) {
         newElement.classList.add("taskList_item");
         newElement.textContent = content;
 
-        const removeButton = this.createRemoveButton(); // Створення кнопки "Видалити"
+        const removeButton = this.createRemoveButton(); 
         newElement.appendChild(removeButton);
 
-        const markDoneButton = this.createMarkDoneButton(saveIllumination);// Створення кнопки "Виконане"
+        const markDoneButton = this.createMarkDoneButton(saveIllumination);
         newElement.appendChild(markDoneButton);
 
         return newElement;
@@ -53,10 +61,7 @@ function TaskManager(data) {
         const markDoneButton = document.createElement("button");
         markDoneButton.textContent = 'Виконане';
         markDoneButton.classList.add("markDoneButton");
-        let bottomClick = saveIllumination === 'dontSave' 
-            ? false
-            : true;
-            
+        let bottomClick = saveIllumination !== 'dontSave';
         markDoneButton.addEventListener('mousemove', function (event) {
             const target = event.target;
             if (target.classList.contains('markDoneButton')) {
@@ -95,7 +100,7 @@ function TaskManager(data) {
         return markDoneButton;
     };
 
-    this.createRemoveButton = function () {// Створення кнопки "Видалити"
+    this.createRemoveButton = function () {
         const removeButton = document.createElement('button');
         removeButton.classList.add("buttonRemoveTask");
         removeButton.textContent = "Видалити";
@@ -143,7 +148,7 @@ function TaskManager(data) {
         localStorage.setItem(LOCAL_STORAGE, JSON.stringify(tasks));
     };
 
-    this.renderTask = function (task) {// Відображення завдання
+    this.renderTask = function (task) {
         const newElement = this.createTaskElement(task.content, task.id, task.saveIllumination);
         if (newElement.getAttribute('saveIlluminationMarkDone') !== 'dontSave'){
             newElement.classList.add('illuminationMarkDone');
@@ -151,13 +156,14 @@ function TaskManager(data) {
         taskList.appendChild(newElement);
     };
     
-    this.loadTasks = function () {// Завантаження завдань
+    this.loadTasks = function () {
         const tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE)) || [];
         tasks.forEach(task => this.renderTask(task));
     };
 }
 
-(new TaskManager({// Ініціалізація TaskManager з передачею елементів DOM
+(new TaskManager({
+    form: document.querySelector('#form'),
     input: document.querySelector('#input'),
     addButton: document.querySelector('#buttonAddTask'),
     taskList: document.querySelector('#taskList'),
